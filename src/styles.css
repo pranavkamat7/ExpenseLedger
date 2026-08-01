@@ -232,6 +232,17 @@ body {
   border-radius: 4px;
   font-family: var(--font-body);
   font-size: 0.9rem;
+  width: 100%;          /* prevent overflow on any screen */
+  min-width: 0;         /* allow shrinking inside grid */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Restore date/month picker appearance just enough to keep the icon */
+.entry-form input[type="date"] {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  color-scheme: dark;
 }
 
 .entry-form input:focus,
@@ -273,8 +284,22 @@ body {
 }
 
 @media (max-width: 860px) {
-  .lower-grid { grid-template-columns: 1fr; }
+  .lower-grid {
+    grid-template-columns: 1fr;
+  }
+  .entry-list-card {
+    grid-column: 1;    /* reset span — already single column */
+  }
 }
+
+/* Category breakdown wrapper */
+.category-breakdown-wrap {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 
 .legend-row {
   display: flex;
@@ -471,10 +496,12 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
     font-size: 1.5rem;
   }
 
+  /* Month picker: full width, tap-friendly */
   .month-picker {
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding: 10px 12px;
+    color-scheme: dark;
   }
 
   .card {
@@ -485,11 +512,12 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
     font-size: 2rem;
   }
 
-  /* Form goes single column */
+  /* Form: single column on mobile */
   .entry-form {
     grid-template-columns: 1fr;
   }
 
+  .entry-form .field,
   .entry-form .field.full {
     grid-column: 1;
   }
@@ -500,18 +528,42 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
     font-size: 1rem;
   }
 
+  /* Date input: ensure it doesn't overflow */
+  .entry-form input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+
+  /* Charts: force full width */
+  .recharts-wrapper,
+  .recharts-surface {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Reduce chart height on mobile */
+  .recharts-responsive-container {
+    height: 180px !important;
+  }
+
+  /* Category breakdown: stack donut above legend */
+  .category-breakdown-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .legend-amount {
+    font-size: 0.72rem;
+  }
+
   .footer-note {
     font-size: 0.65rem;
     margin-top: 24px;
   }
-
-  /* Charts: let recharts shrink */
-  .recharts-wrapper {
-    width: 100% !important;
-  }
 }
 
-/* Tablet (601–860px): just ensure grids are single col */
+/* Tablet (601–860px) */
 @media (min-width: 601px) and (max-width: 860px) {
   .app {
     padding: 28px 20px 60px;
@@ -519,5 +571,10 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
 
   .ledger-header h1 {
     font-size: 1.8rem;
+  }
+
+  .month-picker {
+    width: auto;
+    font-size: 0.9rem;
   }
 }

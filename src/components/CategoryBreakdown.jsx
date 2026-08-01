@@ -15,7 +15,7 @@ export default function CategoryBreakdown({ entries }) {
   const sorted = [...totals].sort((a, b) => b.value - a.value)
 
   return (
-    <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+    <div className="category-breakdown-wrap" style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
       <div style={{ width: 150, height: 150, flexShrink: 0 }}>
         <ResponsiveContainer>
           <PieChart>
