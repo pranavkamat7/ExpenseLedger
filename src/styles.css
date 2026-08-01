@@ -287,6 +287,7 @@ body {
 /* ---------- Entry list ---------- */
 .entry-list-card { grid-column: 1 / -1; }
 
+/* Desktop table */
 table.ledger-table {
   width: 100%;
   border-collapse: collapse;
@@ -316,6 +317,70 @@ table.ledger-table td.amount {
 
 table.ledger-table tr:hover td { background: var(--surface-raised); }
 
+/* Mobile card list — replaces table on small screens */
+@media (max-width: 600px) {
+  table.ledger-table thead { display: none; }
+
+  table.ledger-table,
+  table.ledger-table tbody,
+  table.ledger-table tr,
+  table.ledger-table td {
+    display: block;
+    width: 100%;
+  }
+
+  table.ledger-table tr {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: var(--surface-raised);
+    position: relative;
+  }
+
+  table.ledger-table td {
+    padding: 3px 0;
+    border-bottom: none;
+    font-size: 0.85rem;
+  }
+
+  /* Amount: big, top-right */
+  table.ledger-table td.amount {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    text-align: right;
+    font-size: 1rem;
+    color: var(--paper);
+  }
+
+  /* Date: small mono label */
+  table.ledger-table td:nth-child(1) {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--paper-dim);
+    margin-bottom: 2px;
+  }
+
+  /* Category chip row */
+  table.ledger-table td:nth-child(2) {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-right: 80px; /* leave room for amount */
+  }
+
+  /* Note */
+  table.ledger-table td:nth-child(3) {
+    font-size: 0.78rem;
+    color: var(--paper-dim);
+  }
+
+  /* Delete button */
+  table.ledger-table td:nth-child(5) {
+    padding-top: 8px;
+  }
+}
+
 .cat-chip {
   display: inline-flex;
   align-items: center;
@@ -335,6 +400,7 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  padding: 0;
 }
 .delete-btn:hover { color: var(--danger); }
 
@@ -371,4 +437,75 @@ table.ledger-table tr:hover td { background: var(--surface-raised); }
   font-size: 0.7rem;
   margin-top: 40px;
   letter-spacing: 0.04em;
+}
+
+/* =====================================================
+   MOBILE OVERRIDES  (≤ 600px)
+   ===================================================== */
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 14px 60px;
+  }
+
+  .ledger-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .ledger-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .month-picker {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .runway-total {
+    font-size: 2rem;
+  }
+
+  /* Form goes single column */
+  .entry-form {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-form .field.full {
+    grid-column: 1;
+  }
+
+  .entry-form button {
+    grid-column: 1;
+    padding: 13px 16px;
+    font-size: 1rem;
+  }
+
+  .footer-note {
+    font-size: 0.65rem;
+    margin-top: 24px;
+  }
+
+  /* Charts: let recharts shrink */
+  .recharts-wrapper {
+    width: 100% !important;
+  }
+}
+
+/* Tablet (601–860px): just ensure grids are single col */
+@media (min-width: 601px) and (max-width: 860px) {
+  .app {
+    padding: 28px 20px 60px;
+  }
+
+  .ledger-header h1 {
+    font-size: 1.8rem;
+  }
 }
