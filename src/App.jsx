@@ -11,7 +11,7 @@ const LOCAL_KEY = 'ledger_entries_v1'
 const monthOptions = () => {
   const opts = []
   const now = new Date()
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < 720; i++) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
     opts.push(d.toISOString().slice(0, 7))
   }
