@@ -8,15 +8,7 @@ import EntryList from './components/EntryList'
 
 const LOCAL_KEY = 'ledger_entries_v1'
 
-const monthOptions = () => {
-  const opts = []
-  const now = new Date()
-  for (let i = 0; i < 720; i++) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
-    opts.push(d.toISOString().slice(0, 7))
-  }
-  return opts
-}
+
 
 export default function App() {
   const [month, setMonth] = useState(new Date().toISOString().slice(0, 7))
@@ -77,9 +69,12 @@ export default function App() {
           <div className="eyebrow">Personal Ledger</div>
           <h1>Monthly Expense Sheet</h1>
         </div>
-        <select className="month-picker" value={month} onChange={(e) => setMonth(e.target.value)}>
-          {monthOptions().map((m) => <option key={m} value={m}>{m}</option>)}
-        </select>
+        <input
+          className="month-picker"
+          type="month"
+          value={month}
+          onChange={(e) => e.target.value && setMonth(e.target.value)}
+        />
       </header>
 
       {!supabaseConfigured && (

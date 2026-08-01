@@ -74,6 +74,18 @@ body {
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Style the native month picker calendar icon on WebKit */
+.month-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.5);
+  cursor: pointer;
+}
+
+.month-picker:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
 }
 
 /* ---------- Top sheet grid ---------- */
